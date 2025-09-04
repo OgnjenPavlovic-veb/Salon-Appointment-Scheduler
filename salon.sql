@@ -16,29 +16,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE salon;
---
--- Name: salon; Type: DATABASE; Schema: -; Owner: freecodecamp
---
-
-CREATE DATABASE salon WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
-
-
-ALTER DATABASE salon OWNER TO freecodecamp;
-
-\connect salon
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -173,37 +150,45 @@ ALTER TABLE ONLY public.services ALTER COLUMN service_id SET DEFAULT nextval('pu
 -- Data for Name: appointments; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.appointments VALUES (3, '', 1, 3);
+COPY public.appointments (appointment_id, "time", service_id, customer_id) FROM stdin;
+3		1	3
+20	10:30	1	17
+\.
 
 
 --
 -- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.customers VALUES (3, '', '');
+COPY public.customers (customer_id, phone, name) FROM stdin;
+3		
+17	555-5555-555	leo
+\.
 
 
 --
 -- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.services VALUES (1, 'Haircut');
-INSERT INTO public.services VALUES (2, 'Shave');
-INSERT INTO public.services VALUES (3, 'Pedicure');
+COPY public.services (service_id, name) FROM stdin;
+1	Haircut
+2	Shave
+3	Pedicure
+\.
 
 
 --
 -- Name: appointments_appointment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.appointments_appointment_id_seq', 19, true);
+SELECT pg_catalog.setval('public.appointments_appointment_id_seq', 20, true);
 
 
 --
 -- Name: customers_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.customers_customer_id_seq', 16, true);
+SELECT pg_catalog.setval('public.customers_customer_id_seq', 17, true);
 
 
 --
